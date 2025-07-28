@@ -1,0 +1,42 @@
+A programming language: java,js,php,golang,c++(one framework)
+a database: mongo,mysql,postgres,sqlite(orm,odm)
+
+=========
+a js based backend (data,file,third party api)
+a js runtime: nodejs/deno/bun
+
+//<directory struture>
+package.json
+.env
+-> src
+index(db connects)
+app (config cookie,urlencode)
+constants(enums,db-name)
+->db
+->models (data struture and schema)
+->controllers (functionaity) (methods functions)
+->middlerware 
+->routes
+->utils
+->more(Depends)
+
+
+=====
+computer----->(express)<------server
+//express
+-listen
+-get request
+
+
+//letsGo
+-https://expressjs.com/
+-npm init
+-npm install express
+=env
+-dotenv: https://www.npmjs.com/package/dotenv
+-npm install dotenv --save
+-require('dotenv').config()
+-process.env.PORT
+
+
+
