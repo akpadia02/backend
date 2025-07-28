@@ -78,3 +78,29 @@ export default defineConfig({
 
 
 ->npm run build (dist)
+
+
+=======================================
+DATA MODELLING
+
+kya store krna hai???
+-mongoose (https://mongoosejs.com/) helper (prisma is also of it)
+-data modelling tool 
+  1. (https://www.datensen.com/moon-modeler-for-databases.html) (expensive) (auto code generate of mongo) (database diagram)
+  2. (https://www.eraser.io/) (syntax is quite different)
+  3. pen paper best lol (free)
+eg: register (username,email,password,photo,button)
+
+-
+codesandbox
+github codespace
+stackbiltz
+-
+
+-npm init -y
+-npm install mongoose
+-models
+    import mongoose from 'mongoose';
+    const userSchema=new mongoose.Schema({},{timestamps: true}); 
+    export const User=mongoose.model('User',userSchema); //kya model and kispar
+-when database may store hoga its gets converted to pural (users)
