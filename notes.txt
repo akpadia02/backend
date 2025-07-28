@@ -39,4 +39,42 @@ computer----->(express)<------server
 -process.env.PORT
 
 
+=====================================
+//fullstack_basic
+->backend
+-npm init -y
+-npm i express 
+-file server.js
+-"type":"module" for import express from 'express';
+-use json formatter to view json text
+-npm install cors  var cors = require('cors')  app.use(cors())
 
+->frontend
+-npm create vite@latest .
+-npm install
+-npm run dev
+-npm install axios
+
+
+->has been blocked by CORS policy
+-cross origin
+-url and port both should be same
+-solution:  make url and port whitelist & backend may cors (backend resolution)
+-(ghar k ander sabko allow mat kro)
+-proxy (frontend resolution)
+
+
+->Proxies (need only /api to mention not whole)
+for vite only
+vite.config.js
+export default defineConfig({
+  server: {
+    proxy: {
+      '/api':  'http://localhost:3000', // Adjust the port to match your backend server
+    }
+  },
+  plugins: [react()],
+})
+
+
+->npm run build (dist)
