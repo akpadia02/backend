@@ -104,3 +104,13 @@ stackbiltz
     const userSchema=new mongoose.Schema({},{timestamps: true}); 
     export const User=mongoose.model('User',userSchema); //kya model and kispar
 -when database may store hoga its gets converted to pural (users)
+
+
+==========================================
+
+
+project_youtube
+-npm init
+-gitignore generator (https://mrkandreev.name/snippets/gitignore-generator/#Node)
+-public, src(app,content,index), .env,
+-nodemon (npm install -g nodemon)  (npm i -D nodemon) ("dev":"nodemon src/index.js")
