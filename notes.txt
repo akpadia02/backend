@@ -148,3 +148,38 @@ connect?
             console.error('Error connecting to MongoDB:', error);
         }
     })()
+
+
+
+
+
+
+=============================
+server connect
+
+//express
+->request
+->response
+
+
+cookie-parser (npm i cookie-parser) app.use(cookieParser()); // Needed to parse cookies from incoming requests, allowing access to cookie data in req.cookies
+cors
+
+
+MIDDLEWARE 
+-Middleware is a function that gets access to the request (req) and response (res) objects, and either: (err,req,res,next)
+-passes control to the next middleware or route using next(), or
+-terminates the request-response cycle (e.g., by sending a response or throwing an error).
+    -eg: /instagram:
+    This is the route path the client is hitting (e.g., GET /instagram).
+
+    Middle Block (empty square):
+    This represents the middleware function, which runs before the final response is sent.
+    ➤ In this case, it’s checking: "Is the user logged in?"
+
+    Right Block ((req, res) => res.send("hitesh")):
+    This is the final route handler that sends the response ("hitesh") to the client if everything passes.
+
+UTILS
+-async handler
+-Error nodejs (https://nodejs.org/api/errors.html)
