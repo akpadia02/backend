@@ -1,0 +1,67 @@
+
+HTTP (Hyper text transfer protocol)
+
+//in http data is in clear form (abc bheja toh abc mila) but in https we add one layer do encrypt (data normally readable nah ho server par jake readable ho)
+//client server model
+//url(uniform resource locator) uri (identifier) urn (name)
+//what are http header
+        metadata -key value sent along request and response
+        used: caching,authentication,manager state
+        x-prefix-2012(x-deprecated) 
+        Request Header->from client
+        Response Header-> from Server
+        Representation Heder-> encoding/compression
+        Payload Header-> actual data
+
+//most common headers
+    -accept: application/json
+    -user-agent (konsi application se request aayi hai eg: postman,browser,os)
+    -authorization 
+    -contentType (images videos  pdf etc)
+    -cookie (key value pair)
+    -cache control (data kab expire kru)
+
+//cors
+    -access control allow origin 
+    -access control allow credetials
+    -accept control allow methods
+
+//security
+    -cross origin embedders policy
+    -cross origin opener policy
+    -content secruity policy
+    -x xxs protection
+
+
+//HTTP methods
+-basic set of operations that can be used to internet with server
+-GET: retrieve a resource
+-HEAD: no message body (response header only)
+-OPTIONS: what operations are available
+-TRACE: loopBack test (get same data)
+-DELETE: remove a resource
+-PUT: replace a resource
+-POST: interact with resource (mostly add)
+-PATCH: change part of resource
+
+
+//HTTP status code (imp)
+-1xx informational
+-2xx success
+-3xx redirection
+-4xx client error
+-5xx server error
+
+100-continue
+102-processing
+200-ok
+201-created
+202-accepted
+307-temporary redirect
+308-permanent redirect
+400-bad request
+401-unauthorised
+402-payment required
+404-not found
+500-internal server error
+504-gateway time out 

@@ -296,3 +296,11 @@ export default uploadOnCloudinary;
 middlerware using multer
 
 -using diskstorage (memory can also be used)
+-middlerware/multer.middlerware.js
+
+
+=====================================
+
+//HTTP 
+
+======
