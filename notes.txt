@@ -183,3 +183,61 @@ MIDDLEWARE
 UTILS
 -async handler
 -Error nodejs (https://nodejs.org/api/errors.html)
+
+
+
+====================================
+MIDDLEWARE 
+
+
+-user and video model
+-aggregation queries
+    https://www.npmjs.com/package/mongoose-aggregate-paginate-v2
+    A page based custom aggregate pagination library for Mongoose with customizable labels.
+    npm i mongoose-aggregate-paginate-v2
+-bcrypt
+    https://www.npmjs.com/package/bcrypt
+    npm i bcrypt
+    A library to help you hash passwords.
+-jwt (jsonwebtoken)
+    it is a bearer token (jo usko bear krta hai voh sahi hai)(yeh token jo meko bhejega mai usko data bhejuga)
+    https://www.npmjs.com/package/jsonwebtoken
+    npm i jsonwebtoken
+    https://www.jwt.io/
+    send whatever data u want and it gets encoded (non understandable)
+
+
+-direct encryption is not possible so we need to use mongoose hooks middleware (one of which is pre)
+    https://mongoosejs.com/docs/middleware.html#pre
+    jaise tumhara data save hone ja raha hoga just uske phle kisi user ne call ya controller likha hai uske phele run this hooks
+
+    userSchema.pre('save',async function(next){
+      if(!this.isModified('password')) return next();
+      try {
+          const salt=await bcrypt.genSalt(10);
+          this.password=await bcrypt.hash(this.password,salt);
+          next();
+      } catch (error) {
+          next(error);
+      }
+  }); 
+
+-custom methods
+    userSchema.methods.isPasswordCorrect=async function(password){
+      return await bcrypt.compare(password,this.password);
+  }
+
+
+
+-access token and refresh token 
+    userSchema.methods.generateAccessToken=function(){
+        return jwt.sign({userId:this._id},process.env.ACCESS_TOKEN_SECRET,{
+            expiresIn: process.env.ACCESS_TOKEN_EXPIRY || '1d',
+        });
+    }
+
+    userSchema.methods.generateRefreshToken=function(){
+        return jwt.sign({userId:this._id},process.env.REFRESH_TOKEN_SECRET,{    
+            expiresIn: process.env.REFRESH_TOKEN_EXPIRY || '10d',
+        });
+    }
