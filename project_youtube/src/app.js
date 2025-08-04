@@ -30,4 +30,12 @@ app.use(express.static('public'));
 
 app.use(cookieParser()); // Needed to parse cookies from incoming requests, allowing access to cookie data in req.cookies
 
+
+
+//routes import
+import userRoutes from './routes/user.routes.js';
+
+//routes declaration
+app.use('/api/v1/users', userRoutes); //https://localhost:8000/api/v1/users/register 
+
 export default app;

@@ -1,0 +1,42 @@
+//controllers (logics)
+    "What should happen when a request hits a route?"
+    Controllers are functions that handle the logic of each route (e.g., register a user, fetch products).
+    Separate business logic from route definitions
+    Easier to test, reuse, and maintain
+->user.controller.js
+    -asyncHandler 
+    import { asyncHandler } from '../utils/asyncHandler.js';
+    const registerUser = asyncHandler(async (req, res, next) => {
+    // Registration logic here
+        res.status(200).json({ 
+            message: 'User registered successfully' 
+        });
+    });
+
+    export { registerUser };
+
+
+
+
+//routes
+    "What URL should do what?"
+    Routes define the paths (URLs) in your API and map them to a function (controller).
+    Structure your API (e.g., /register, /login, /products/:id)
+    Decide what should happen when a certain request is made
+->user.routes.js
+import {Router} from 'express';
+import { registerUser } from '../controllers/user.controller.js';
+const router = Router();
+router.route('/register').post(registerUser);
+export default router;
+
+//app.js
+routes import
+import userRoutes from './routes/user.routes.js';
+routes declaration
+app.use('/users', userRoutes);
+
+
+
+//"How do I test my API without a frontend?"
+postman and thunderClient

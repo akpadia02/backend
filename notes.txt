@@ -185,6 +185,12 @@ UTILS
 -Error nodejs (https://nodejs.org/api/errors.html)
 
 
+Need for asyncHandler
+In Express.js, unhandled errors in async functions (like in controllers) won't be automatically caught. That means if a Promise inside your controller rejects and you don't have a try-catch, your server might crash or ignore the error silently.
+Hence, we wrap async functions using asyncHandler to ensure:
+Errors are caught
+They are passed to next(error) middleware (Express error handler)
+
 
 ====================================
 MIDDLEWARE (jana se phele muhjse milke jana)

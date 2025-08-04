@@ -6,7 +6,9 @@ dotenv.config({path: './env'}); //better version
 // import { DB_NAME } from './contents';
 import express from 'express';
 import connectDB from './db/index.js';
-const app=express();
+// const app=express();  //// ← created a brand new empty Express app
+
+import app from './app.js'; // Import the app from app.js
 
 
 //effing
