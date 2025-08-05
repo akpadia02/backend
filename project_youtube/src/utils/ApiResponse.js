@@ -3,12 +3,13 @@ class ApiResponse{
         this.statusCode = statusCode<400;
         this.data = data;
         this.message = message;
-        this.errors = errors;
-        this.success = true;
+        // this.errors = errors;
+        this.success = statusCode<400;
 
-        if(!data){
-            this.success = false;
-            this.data = null;
-        }
+        // if(!data){
+        //     this.success = false;
+        //     this.data = null;
+        // }
     }
 }
+export { ApiResponse };
