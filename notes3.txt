@@ -7,7 +7,7 @@
     You send this token with each request to prove you're logged in.
     When it expires, you can’t use it anymore.
 
-🔁 Refresh Token
+🔁 Refresh Token (session storage)
 -What it is: A long-lived token (e.g. days or weeks) also given at login.
 -Purpose: Used to get a new access token without logging in again.
 -How it works:
