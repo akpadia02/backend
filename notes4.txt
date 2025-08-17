@@ -1,0 +1,109 @@
+// Subscription Model
+
+Subscription Schema (Document-Based Model)
+
+Entities:
+- Subscribers → a, b, c, d, e
+- Channels → CAC, HCC, FCC
+
+Storage Design:
+- Each subscription = one document
+- Fields in a document:
+  - channel
+  - subscriber
+
+Example Documents:
+- { channel: "CAC", subscriber: "a" }
+- { channel: "CAC", subscriber: "b" }
+- { channel: "CAC", subscriber: "c" }
+- { channel: "HCC", subscriber: "c" }
+- { channel: "FCC", subscriber: "c" }
+
+Counting Subscribers for a Channel (e.g., CAC):
+- Iterate over all documents
+- Count how many have channel = "CAC"
+- Example: CAC → 3 subscribers (a, b, c)
+
+Counting Channels for a Subscriber (e.g., c):
+- Iterate over all documents
+- Count how many have subscriber = "c"
+- Example: c → 3 channels (CAC, HCC, FCC)
+
+Observations:
+- User c is subscribed to multiple channels
+- Channel CAC has multiple subscribers
+- Data redundancy exists (same subscriber appears in multiple docs)
+- Queries are done via iteration + filtering
+
+
+
+
+//aggregation pipeline
+Aggregation in MongoDB = process of processing multiple documents and returning computed results.
+It’s called a pipeline because the operations are chained step by step.
+Aggregation = the whole process (like "I am analyzing sales data").
+Pipeline = the tool/steps used (like "First filter → then group → then sort").
+In MongoDB, an aggregation pipeline is a framework for performing advanced data processing and transformations on documents inside a collection.
+An aggregation pipeline is a sequence of stages (operators) applied to documents in a MongoDB collection to filter, group, transform, and analyze data.
+https://www.mongodb.com/docs/manual/aggregation/
+Each stage performs a specific operation (filtering, grouping, projecting, sorting, etc.).
+Written as an array of stages ([ { stage1 }, { stage2 }, ... ]).
+Similar to SQL queries (e.g., SELECT, GROUP BY, HAVING, ORDER BY), but more flexible.
+Used for analytics, reporting, and data transformation.
+Common Stages
+    $match → Filters documents (like WHERE in SQL).
+    $group → Groups documents by a key and performs aggregations (like GROUP BY).
+    $project → Selects specific fields, reshapes documents.
+    $sort → Sorts documents.
+    $limit / $skip → Limits or skips documents.
+    $lookup → Performs joins with another collection.
+    $unwind → Deconstructs arrays into individual documents.
+    $count → Counts documents.
+
+eg:
+orders
+{ "_id": 1, "item": "pen", "qty": 10, "customerId": 101 }
+{ "_id": 2, "item": "notebook", "qty": 5, "customerId": 102 }
+{ "_id": 3, "item": "pencil", "qty": 20, "customerId": 101 }
+customers
+{ "_id": 101, "name": "Alice", "city": "Delhi" }
+{ "_id": 102, "name": "Bob", "city": "Mumbai" }
+Join orders with customers
+db.orders.aggregate([
+  {
+    $lookup: {
+      from: "customers",        // other collection
+      localField: "customerId", // field in orders
+      foreignField: "_id",      // field in customers
+      as: "customerInfo"        // output array field
+    }
+  }
+])
+Output
+{
+  "_id": 1,
+  "item": "pen",
+  "qty": 10,
+  "customerId": 101,
+  "customerInfo": [
+    { "_id": 101, "name": "Alice", "city": "Delhi" }
+  ]
+}
+{
+  "_id": 2,
+  "item": "notebook",
+  "qty": 5,
+  "customerId": 102,
+  "customerInfo": [
+    { "_id": 102, "name": "Bob", "city": "Mumbai" }
+  ]
+}
+{
+  "_id": 3,
+  "item": "pencil",
+  "qty": 20,
+  "customerId": 101,
+  "customerInfo": [
+    { "_id": 101, "name": "Alice", "city": "Delhi" }
+  ]
+}
